@@ -1,0 +1,24 @@
+#docker run -it -p 3000:3000 -v /app/node_modules -v ${pwd}:/app c152b647e970
+version: '3'
+services: 
+    web:
+        stdin_open: true
+        #build: .
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        ports: 
+            - "3000:3000"
+        volumes: 
+            - /app/node_modules
+            - .:/app
+        environment: 
+            - CHOKIDAR_USEPOLLING=true
+    test:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes: 
+            - /app/node_modules
+            - .:/app
+        command: ["npm", "run", "test"]

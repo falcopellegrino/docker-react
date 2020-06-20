@@ -1,0 +1,12 @@
+language: generic
+
+sudo: required # super user
+
+services:
+    - docker # travis install a copuy of docker
+
+before_install:
+    - docker build -t falcopellegrino/docker-react -f Dockerfile.dev . # tag here is only for testing environment, could use anything
+
+script:
+    - docker run -e CI=true falcopellegrino/docker-react npm run test

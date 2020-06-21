@@ -18,6 +18,7 @@ RUN npm run build
 
 # any phase can have a single FROM, so here begins 2nd phase
 FROM nginx
+EXPOSE 80
 
 #copia dalla fase builder, dalla cartella /app/build, nella cartella della fase corrente /usr/share/nginx/html
 COPY --from=builder /app/build /usr/share/nginx/html
